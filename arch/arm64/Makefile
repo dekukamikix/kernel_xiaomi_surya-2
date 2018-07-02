@@ -88,6 +88,7 @@ LDFLAGS		+= -maarch64_elf64_be_vec
 else
 LDFLAGS		+= -maarch64linuxb
 endif
+LDFLAGS		+= -maarch64elfb
 UTS_MACHINE	:= aarch64_be
 else
 KBUILD_CPPFLAGS	+= -mlittle-endian
@@ -99,6 +100,7 @@ LDFLAGS		+= -maarch64_elf64_le_vec
 else
 LDFLAGS		+= -maarch64linux
 endif
+LDFLAGS		+= -maarch64elf
 UTS_MACHINE	:= aarch64
 endif
 
