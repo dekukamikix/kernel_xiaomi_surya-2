@@ -1,22 +1,26 @@
+# Use the latest 2.1 version of CircleCI pipeline process engine.
+# See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
+
+# Define a job to be invoked later in a workflow.
+# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  compile:
-   docker:
-      - image: ubuntu:20.04
-   steps:
+  say-hello:
+    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
+    docker:
+      - image: cimg/base:stable
+    # Add steps to the job
+    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+    steps:
+      - checkout
       - run:
-          no_output_timeout: 50m 
-          command: |
-           apt-get -y update && apt-get -y upgrade && apt-get -y install python python2 python3 python3-pip tzdata build-essential bc bison flex gcc clang libc6 libstdc++6 libssl-dev zip p7zip-full git
-           git clone https://github.com/dekukamikix/ci_script -b master
-           cd ci_script
-           git clone https://github.com/azrim/AnyKernel3
-           git clone https://github.com/dekukamikix/kernel_xiaomi_surya-2.git
-           git clone https://github.com/silont-project/silont-clang.git -b master --depth=1
-           pip3 install -r requirements.txt   
-           python3 ci_build.py --build --tele-notifier --tele-check --verbose --tele-tz Asia/Jakarta
+          name: "Say hello"
+          command: "echo Hello, World!"
+
+# Invoke jobs via workflows
+# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  version: 2.1
-  cooking:
+  say-hello-workflow:
     jobs:
-      - compile
+      - say-hello
