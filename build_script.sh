@@ -21,8 +21,8 @@ PARSE_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 PARSE_ORIGIN="$(git config --get remote.origin.url)"
 COMMIT_POINT="$(git log --pretty=format:'%h : %s' -1)"
 CHEAD="$(git rev-parse --short HEAD)"
-LATEST_COMMIT="[$COMMIT_POINT](https://github.com/silont-project/kernel_xiaomi_surya/commit/$CHEAD)"
-LOGS_URL="[See Drone CI Build Logs Here](https://cloud.drone.io/silont-project/kernel_xiaomi_surya/$DRONE_BUILD_NUMBER)"
+LATEST_COMMIT="[$COMMIT_POINT](https://github.com/dekukamikix/kernel_xiaomi_surya-2/commit/$CHEAD)"
+LOGS_URL="[See Circle CI Build Logs Here](https://circleci.com/gh/dekukamikix/kernel_xiaomi_surya-2/$CIRCLE_BUILD_NUM)"
 
 # Compiler
 mkdir -p "/mnt/workdir/silont-clang"
@@ -163,7 +163,7 @@ packingkernel() {
     DIFF=$(( END - START ))
 
     # Ship it to the CI channel
-    tg_ship "<b>-------- $DRONE_BUILD_NUMBER Build Succeed --------</b>" \
+    tg_ship "<b>-------- $CIRCLE_BUILD_NUM Build Succeed --------</b>" \
             "" \
             "<b>Device:</b> ${DEVICE}" \
             "<b>Version:</b> ${KERNELTYPE}" \
@@ -176,7 +176,7 @@ packingkernel() {
 # Starting
 NOW=$(date +%d/%m/%Y-%H:%M)
 START=$(date +"%s")
-tg_cast "*$DRONE_BUILD_NUMBER CI Build Triggered*" \
+tg_cast "*$CIRCLE_BUILD_NUM CI Build Triggered*" \
 	"Compiling with *$(nproc --all)* CPUs" \
 	"-----------------------------------------" \
 	"*Compiler:* ${CSTRING}" \
@@ -184,7 +184,7 @@ tg_cast "*$DRONE_BUILD_NUMBER CI Build Triggered*" \
 	"*Kernel:* ${KERNEL}" \
 	"*Version:* ${KERNELTYPE}" \
 	"*Linux Version:* $(make kernelversion)" \
-	"*Branch:* ${DRONE_BRANCH}" \
+	"*Branch:* ${CIRCLE_BRANCH}" \
 	"*Clocked at:* ${NOW}" \
 	"*Latest commit:* ${LATEST_COMMIT}" \
  	"------------------------------------------" \
