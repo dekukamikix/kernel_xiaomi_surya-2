@@ -13,7 +13,7 @@ ANYKERNEL="${HOME}"/anykernel
 LOGS="${HOME}"/${CHEAD}.log
 
 # Repo URL
-ANYKERNEL_REPO="https://github.com/azrim/anykernel3.git"
+ANYKERNEL_REPO="https://github.com/dekukamikix/anykernel3.git"
 ANYKERNEL_BRANCH="master"
 
 # Repo info
@@ -44,7 +44,7 @@ fi
 
 # Defconfig
 DEFCONFIG="surya_defconfig"
-REGENERATE_DEFCONFIG="true" # unset if don't want to regenerate defconfig
+REGENERATE_DEFCONFIG="" # unset if don't want to regenerate defconfig
 
 # Telegram
 CHATID="$CHANNEL_ID" # Group/channel chatid (use rose/userbot to get it)
