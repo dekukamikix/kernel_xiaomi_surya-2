@@ -134,12 +134,12 @@ makekernel() {
 # Packing kranul
 packingkernel() {
     # Copy compiled kernel
-    cp /root/project/kernel_xiaomi_surya-2/out/arch/arm64/boot/Image.gz-dtb /root/anykernel/Image.gz-dtb
-    : 'if [ -d "${ANYKERNEL}" ]; then
+    if [ -d "${ANYKERNEL}" ]; then
         rm -rf "${ANYKERNEL}"
     fi
     git clone "$ANYKERNEL_REPO" -b "$ANYKERNEL_BRANCH" "${ANYKERNEL}"
-    if ! [ -f "${KERN_IMG}" ]; then
+    cp /root/project/kernel_xiaomi_surya-2/out/arch/arm64/boot/Image.gz-dtb /root/anykernel/Image.gz-dtb
+    : 'if ! [ -f "${KERN_IMG}" ]; then
         build_failed
     fi
     if ! [ -f "${KERN_DTB}" ]; then
@@ -154,7 +154,7 @@ packingkernel() {
     '
 
     # Zip the kernel, or fail
-    cd /root/anykernel || exit
+    cd "${ANYKERNEL}" || exit
     zip -r9 "${TEMPZIPNAME}" ./*
 
     # Sign the zip before sending it to Telegram
