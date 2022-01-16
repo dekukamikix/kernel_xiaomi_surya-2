@@ -44,7 +44,7 @@ fi
 
 # Defconfig
 DEFCONFIG="surya_defconfig"
-REGENERATE_DEFCONFIG="" # unset if don't want to regenerate defconfig
+REGENERATE_DEFCONFIG="true" # unset if don't want to regenerate defconfig
 
 # Telegram
 CHATID="$CHANNEL_ID" # Group/channel chatid (use rose/userbot to get it)
