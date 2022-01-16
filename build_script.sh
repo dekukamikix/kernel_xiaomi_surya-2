@@ -138,6 +138,9 @@ packingkernel() {
         rm -rf "${ANYKERNEL}"
     fi
     git clone "$ANYKERNEL_REPO" -b "$ANYKERNEL_BRANCH" "${ANYKERNEL}"
+    if ! [ -f /root/project/kernel_xiaomi_surya-2/out/arch/arm64/boot/Image.gz-dtb ]; then
+        build_failed
+    fi
     cp /root/project/kernel_xiaomi_surya-2/out/arch/arm64/boot/Image.gz-dtb /root/anykernel/Image.gz-dtb
     : 'if ! [ -f "${KERN_IMG}" ]; then
         build_failed
