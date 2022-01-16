@@ -90,7 +90,7 @@ versioning() {
 
 # Costumize
 versioning
-KERNEL="alpha-Mechatron"
+KERNEL="beta-Mechatron"
 DEVICE="Surya"
 KERNELTYPE="$CONFIG_LOCALVERSION"
 KERNELNAME="${KERNEL}-${DEVICE}-${KERNELTYPE}-$(date +%y%m%d-%H%M)"
@@ -108,7 +108,7 @@ regenerate() {
 build_failed() {
 	    END=$(date +"%s")
 	    DIFF=$(( END - START ))
-	    echo -e "Kernel compilation failed, See buildlog to fix errors"
+	    echo -e "Kernel compilation failed, See build log to fix errors"
 	    tg_fail "Build for ${DEVICE} <b>failed</b> in $((DIFF / 60)) minute(s) and $((DIFF % 60)) second(s)!"
 	    exit 1
 }
@@ -168,11 +168,11 @@ packingkernel() {
     DIFF=$(( END - START ))
 
     # Ship it to the CI channel
-    tg_ship "<b>-------- $CIRCLE_BUILD_NUM Build Succeed --------</b>" \
+    tg_ship "<b>-------- Build $CIRCLE_BUILD_NUM Succeeded --------</b>" \
             "" \
             "<b>Device:</b> ${DEVICE}" \
-            "<b>Version:</b> ${KERNELTYPE}" \
-            "<b>Commit Head:</b> ${CHEAD}" \
+            "<b>Build ver:</b> ${KERNELTYPE}" \
+            "<b>HEAD Commit:</b> ${CHEAD}" \
             "<b>Time elapsed:</b> $((DIFF / 60)):$((DIFF % 60))" \
             "" \
             "Leave a comment below if encountered any bugs!"
@@ -181,14 +181,14 @@ packingkernel() {
 # Starting
 NOW=$(date +%d/%m/%Y-%H:%M)
 START=$(date +"%s")
-tg_cast "*$CIRCLE_BUILD_NUM CI Build Triggered*" \
+tg_cast "*CI Build $CIRCLE_BUILD_NUM Triggered*" \
 	"Compiling with *$(nproc --all)* CPUs" \
 	"-----------------------------------------" \
-	"*Compiler:* ${CSTRING}" \
+	"*Compiler ver:* ${CSTRING}" \
 	"*Device:* ${DEVICE}" \
-	"*Kernel:* ${KERNEL}" \
-	"*Version:* ${KERNELTYPE}" \
-	"*Linux Version:* $(make kernelversion)" \
+	"*Kernel name:* ${KERNEL}" \
+	"*Build ver:* ${KERNELTYPE}" \
+	"*Linux version:* $(make kernelversion)" \
 	"*Branch:* ${CIRCLE_BRANCH}" \
 	"*Clocked at:* ${NOW}" \
 	"*Latest commit:* ${LATEST_COMMIT}" \
