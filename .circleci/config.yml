@@ -9,7 +9,7 @@ jobs:
           environment: 
             TG_TOKEN: 1120857851:AAFr99rMHnOLiUQJx_WzRKLsZf83toWwY_s
             CHANNEL_ID: -1001698415738
-          command: bash /home/project/kernel_xiaomi_surya-2/build_script.sh
+          command: bash /root/project/kernel_xiaomi_surya-2/build_script.sh
 workflows:
   version: 2.1
   cooking:
