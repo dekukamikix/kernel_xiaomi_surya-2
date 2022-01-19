@@ -90,7 +90,7 @@ versioning() {
 
 # Costumize
 versioning
-KERNEL="beta-Mechatron-Alternativegit "
+KERNEL="beta-Mechatron-Alternative"
 DEVICE="Surya"
 KERNELTYPE="$CONFIG_LOCALVERSION"
 KERNELNAME="${KERNEL}-${DEVICE}-${KERNELTYPE}-$(date +%y%m%d-%H%M)"
