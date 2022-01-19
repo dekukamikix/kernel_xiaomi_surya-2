@@ -43,7 +43,7 @@ else
 fi
 
 # Defconfig
-DEFCONFIG="surya_defconfig"
+DEFCONFIG="vendor/surya-perf_defconfig"
 REGENERATE_DEFCONFIG="" # unset if don't want to regenerate defconfig
 
 # Telegram
@@ -84,13 +84,13 @@ tg_fail() {
 # Versioning
 versioning() {
     cat arch/arm64/configs/"${DEFCONFIG}" | grep CONFIG_LOCALVERSION= | tee /mnt/workdir/name.sh
-    sed -i 's/-Mechatron-//g' /mnt/workdir/name.sh
+    sed -i 's/-Mechatron-Alt//g' /mnt/workdir/name.sh
     source /mnt/workdir/name.sh
 }
 
 # Costumize
 versioning
-KERNEL="beta-Mechatron"
+KERNEL="beta-Mechatron-Alt"
 DEVICE="Surya"
 KERNELTYPE="$CONFIG_LOCALVERSION"
 KERNELNAME="${KERNEL}-${DEVICE}-${KERNELTYPE}-$(date +%y%m%d-%H%M)"
