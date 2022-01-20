@@ -44,7 +44,7 @@ fi
 
 # Defconfig
 DEFCONFIG="vendor/surya-perf_defconfig"
-REGENERATE_DEFCONFIG="" # unset if don't want to regenerate defconfig
+REGENERATE_DEFCONFIG="true" # unset if don't want to regenerate defconfig
 
 # Telegram
 CHATID="$CHANNEL_ID" # Group/channel chatid (use rose/userbot to get it)
@@ -118,7 +118,7 @@ makekernel() {
     sed -i "s/${KERNELTYPE}/${KERNELTYPE}-TEST/g" "${KERNEL_DIR}/arch/arm64/configs/${DEFCONFIG}"
     echo "ichiro@MacBook-Pro-2012" > "$KERNEL_DIR"/.builderdata
     export PATH="${COMP_PATH}"
-    make O=out ARCH=arm64 ${DEFCONFIG}
+    make O=out ARCH=arm64 ${DEFCONFIG} savedefconfig
     if [[ "${REGENERATE_DEFCONFIG}" =~ "true" ]]; then
         regenerate
     fi
