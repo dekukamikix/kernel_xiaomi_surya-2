@@ -142,6 +142,7 @@ packingkernel() {
         build_failed
     fi
     cp /root/project/kernel_xiaomi_surya-2/out/arch/arm64/boot/Image.gz-dtb /root/anykernel/Image.gz-dtb
+    cp /root/project/kernel_xiaomi_surya-2/out/arch/arm64/boot/dtbo.img /root/anykernel/dtbo.img
     : 'if ! [ -f "${KERN_IMG}" ]; then
         build_failed
     fi
