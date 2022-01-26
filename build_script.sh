@@ -84,13 +84,13 @@ tg_fail() {
 # Versioning
 versioning() {
     cat arch/arm64/configs/"${DEFCONFIG}" | grep CONFIG_LOCALVERSION= | tee /mnt/workdir/name.sh
-    sed -i 's/-Mechatron-Alt-//g' /mnt/workdir/name.sh
+    sed -i 's/-Mechatron-Alternative-//g' /mnt/workdir/name.sh
     source /mnt/workdir/name.sh
 }
 
 # Costumize
 versioning
-KERNEL="beta-Mechatron-Alternative"
+KERNEL="Mechatron-Alternative"
 DEVICE="Surya"
 KERNELTYPE="$CONFIG_LOCALVERSION"
 KERNELNAME="${KERNEL}-${DEVICE}-${KERNELTYPE}-$(date +%y%m%d-%H%M)"
@@ -115,7 +115,7 @@ build_failed() {
 
 # Building
 makekernel() {
-    sed -i "s/${KERNELTYPE}/${KERNELTYPE}-TEST/g" "${KERNEL_DIR}/arch/arm64/configs/${DEFCONFIG}"
+    sed -i "s/${KERNELTYPE}/${KERNELTYPE}/g" "${KERNEL_DIR}/arch/arm64/configs/${DEFCONFIG}"
     echo "ichiro@MacBook-Pro-2012" > "$KERNEL_DIR"/.builderdata
     export PATH="${COMP_PATH}"
     make O=out ARCH=arm64 ${DEFCONFIG} savedefconfig
@@ -168,20 +168,20 @@ packingkernel() {
     DIFF=$(( END - START ))
 
     # Ship it to the CI channel
-    tg_ship "<b>-------- Build $CIRCLE_BUILD_NUM Succeeded --------</b>" \
+    tg_ship "<b>-------- Build #$CIRCLE_BUILD_NUM Succeeded --------</b>" \
             "" \
             "<b>Device:</b> ${DEVICE}" \
             "<b>Build ver:</b> ${KERNELTYPE}" \
             "<b>HEAD Commit:</b> ${CHEAD}" \
             "<b>Time elapsed:</b> $((DIFF / 60)):$((DIFF % 60))" \
             "" \
-            "Leave a comment below if encountered any bugs!"
+            "Try it and give me some thoughts!"
 }
 
 # Starting
 NOW=$(date +%d/%m/%Y-%H:%M)
 START=$(date +"%s")
-tg_cast "*CI Build $CIRCLE_BUILD_NUM Triggered*" \
+tg_cast "*CI Build #$CIRCLE_BUILD_NUM Triggered*" \
 	"Compiling with *$(nproc --all)* CPUs" \
 	"-----------------------------------------" \
 	"*Compiler ver:* ${CSTRING}" \
