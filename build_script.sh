@@ -14,7 +14,7 @@ LOGS="${HOME}"/${CHEAD}.log
 
 # Repo URL
 ANYKERNEL_REPO="https://github.com/dekukamikix/anykernel3.git"
-ANYKERNEL_BRANCH="master"
+ANYKERNEL_BRANCH="meme"
 
 # Repo info
 PARSE_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
@@ -35,7 +35,7 @@ GCC_DIR="/mnt/workdir/aarch64-elf-gcc" # Doesn't needed if use proton-clang
 GCC32_DIR="/mnt/workdir/arm-eabi-gcc" # Doesn't needed if use proton-clang
 CLANG_FILE="/mnt/workdir/clang.tar.gz"
 
-git clone https://github.com/kdrag0n/proton-clang.git --depth=1 --single-branch $CLANG_DIR -b master
+# git clone https://github.com/kdrag0n/proton-clang.git --depth=1 --single-branch $CLANG_DIR -b master
 git clone https://github.com/silont-project/aarch64-elf-gcc.git --depth=1 --single-branch $GCC_DIR -b arm64/10
 git clone https://github.com/silont-project/arm-eabi-gcc.git --depth=1 --single-branch $GCC32_DIR -b arm/10
 
