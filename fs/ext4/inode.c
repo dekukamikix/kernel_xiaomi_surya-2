@@ -3721,7 +3721,7 @@ static ssize_t ext4_direct_IO_write(struct kiocb *iocb, struct iov_iter *iter)
 		dio_flags = DIO_LOCKING;
 	}
 #if defined(CONFIG_EXT4_FS_ENCRYPTION)
-	WARN_ON(ext4_encrypted_inode(inode) && S_ISREG(inode->i_mode)
+	WARN_ON(IS_ENCRYPTED(inode) && S_ISREG(inode->i_mode)
 		&& !fscrypt_using_hardware_encryption(inode));
 #endif
 	ret = __blockdev_direct_IO(iocb, inode,
@@ -4039,7 +4039,7 @@ static int __ext4_block_zero_page_range(handle_t *handle,
 	if (!buffer_uptodate(bh)) {
 		err = -EIO;
 		decrypt = S_ISREG(inode->i_mode) &&
-			ext4_encrypted_inode(inode) &&
+			IS_ENCRYPTED(inode) &&
 		    !fscrypt_using_hardware_encryption(inode);
 		ll_rw_block(REQ_OP_READ, (decrypt ? REQ_NOENCRYPT : 0), 1, &bh);
 		wait_on_buffer(bh);
@@ -4127,7 +4127,7 @@ static int ext4_block_truncate_page(handle_t *handle,
 
 	/* If we are processing an encrypted inode during orphan list
 	 * handling */
-	if (ext4_encrypted_inode(inode) && !fscrypt_has_encryption_key(inode))
+	if (IS_ENCRYPTED(inode) && !fscrypt_has_encryption_key(inode))
 		return 0;
 
 	blocksize = inode->i_sb->s_blocksize;
