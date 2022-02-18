@@ -9,12 +9,6 @@ jobs:
             git config --global user.name "Achmad Arsyil Wiradinata"
             git config --global user.email "dekukamikix@gmail.com"
             git clone https://github.com/dekukamikix/kernel_xiaomi_surya-2.git -b rebase-from-qs --depth=1
-      - run:
-          no_output_timeout: 50m 
-          environment: 
-            TG_TOKEN: 1120857851:AAFr99rMHnOLiUQJx_WzRKLsZf83toWwY_s
-            CHANNEL_ID: -1001698415738
-          command: |
             cd kernel_xiaomi_surya-2
             bash /root/project/kernel_xiaomi_surya-2/build_script.sh
 workflows:
