@@ -93,7 +93,7 @@ versioning
 KERNEL="Mechatron-Alternative"
 DEVICE="Surya"
 KERNELTYPE="$CONFIG_LOCALVERSION"
-KERNELNAME="${KERNEL}-${DEVICE}-${KERNELTYPE}-$(date +%y%m%d-%H%M)"
+KERNELNAME="${KERNEL}-${KERNELTYPE}-${DEVICE}-$(date +%d%m%Y-%H%M)"
 TEMPZIPNAME="${KERNELNAME}-unsigned.zip"
 ZIPNAME="${KERNELNAME}.zip"
 
