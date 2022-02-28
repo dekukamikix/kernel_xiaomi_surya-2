@@ -94,10 +94,10 @@ versioning() {
 
 # Costumize
 versioning
-KERNEL="beta-Mechatron-Meme"
+KERNEL="Mechatron-Meme"
 DEVICE="Surya"
 KERNELTYPE="$CONFIG_LOCALVERSION"
-KERNELNAME="${KERNEL}-${DEVICE}-${KERNELTYPE}-$(date +%y%m%d-%H%M)"
+KERNELNAME="${KERNEL}-${KERNELTYPE}-${DEVICE}-$(date +%d%m%Y-%H%M)"
 TEMPZIPNAME="${KERNELNAME}-unsigned.zip"
 ZIPNAME="${KERNELNAME}.zip"
 
@@ -173,12 +173,15 @@ packingkernel() {
     DIFF=$(( END - START ))
 
     # Ship it to the CI channel
-    tg_ship "<b>Build #$CIRCLE_BUILD_NUM for meme succeeded</b>" \
+    tg_ship "<b>Build #$CIRCLE_BUILD_NUM for *${KERNEL}* succeeded</b>" \
             "" \
             "<b>Device:</b> ${DEVICE}" \
-            "<b>Build ver:</b> ${KERNELTYPE}" \
+            "<b>Build version:</b> ${KERNELTYPE}" \
             "<b>HEAD Commit:</b> ${CHEAD}" \
-            "<b>Time elapsed:</b> $((DIFF / 60)):$((DIFF % 60))" \
+            "<b>Build time elapsed:</b> $((DIFF / 60)):$((DIFF % 60))" \
+            "" \
+            "*Backup Boot and DTBO first before installing!*" \
+            "In case of kernel not booting 😆" \
             "" \
             "Try it and give me some thoughts!"
 }
@@ -186,17 +189,16 @@ packingkernel() {
 # Starting
 NOW=$(date +%d/%m/%Y-%H:%M)
 START=$(date +"%s")
-tg_cast "*CI Build #$CIRCLE_BUILD_NUM for meme triggered*" \
-	"Compiling with *$(nproc --all)* CPUs" \
+tg_cast "*CI build #$CIRCLE_BUILD_NUM triggered*" \
+	"Compiling ${KERNEL} with *$(nproc --all)* CPUs" \
 	"-----------------------------------------" \
-	"*Compiler ver:* ${CSTRING}" \
+	"*Compiler:* ${CSTRING}" \
 	"*Device:* ${DEVICE}" \
-	"*Kernel name:* ${KERNEL}" \
-	"*Build ver:* ${KERNELTYPE}" \
-	"*Linux version:* $(make kernelversion)" \
+	"*Build version:* ${KERNELTYPE}" \
+	"*Tag version:* $(make kernelversion)" \
 	"*Branch:* ${CIRCLE_BRANCH}" \
-	"*Clocked at:* ${NOW}" \
-	"*Latest commit:* ${LATEST_COMMIT}" \
+	"*Start build from:* ${NOW}" \
+	"*Latest git commit:* ${LATEST_COMMIT}" \
  	"------------------------------------------" \
 	"${LOGS_URL}"
 
