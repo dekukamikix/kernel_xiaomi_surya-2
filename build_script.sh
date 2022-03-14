@@ -28,16 +28,16 @@ LOGS_URL="[See Circle CI Build Logs Here](https://circleci.com/gh/dekukamikix/ke
 mkdir -p "/mnt/workdir/proton-clang"
 mkdir -p "/mnt/workdir/aarch64-elf-gcc"
 mkdir -p "/mnt/workdir/arm-eabi-gcc"
-COMP_TYPE="gcc" # unset if want to use gcc as compiler
+COMP_TYPE="clang" # unset if want to use gcc as compiler
 CLANG_DIR="/mnt/workdir/proton-clang"
 CLANG_URL="https://github.com/silont-project/silont-clang/archive/20210117.tar.gz"
 GCC_DIR="/mnt/workdir/aarch64-elf-gcc" # Doesn't needed if use proton-clang
 GCC32_DIR="/mnt/workdir/arm-eabi-gcc" # Doesn't needed if use proton-clang
 CLANG_FILE="/mnt/workdir/clang.tar.gz"
 
-# git clone https://github.com/kdrag0n/proton-clang.git --depth=1 --single-branch $CLANG_DIR -b master
-git clone https://github.com/silont-project/aarch64-elf-gcc.git --depth=1 --single-branch $GCC_DIR -b arm64/10
-git clone https://github.com/silont-project/arm-eabi-gcc.git --depth=1 --single-branch $GCC32_DIR -b arm/10
+git clone https://github.com/kdrag0n/proton-clang.git --depth=1 --single-branch $CLANG_DIR -b master
+#git clone https://github.com/silont-project/aarch64-elf-gcc.git --depth=1 --single-branch $GCC_DIR -b arm64/10
+#git clone https://github.com/silont-project/arm-eabi-gcc.git --depth=1 --single-branch $GCC32_DIR -b arm/10
 
 if [[ "${COMP_TYPE}" =~ "clang" ]]; then
     CSTRING=$("$CLANG_DIR"/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')
