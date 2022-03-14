@@ -6,7 +6,7 @@ jobs:
    steps:
       - run:
           command: |
-            sudo pacman -Sy --noconfirm python
+            sudo pacman -Sy --noconfirm python cpio
             git config --global user.name "Achmad Arsyil Wiradinata"
             git config --global user.email "dekukamikix@gmail.com"
             git clone https://github.com/dekukamikix/kernel_xiaomi_surya-2.git -b rebase-from-w554 --depth=1
