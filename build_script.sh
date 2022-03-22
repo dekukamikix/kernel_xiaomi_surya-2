@@ -88,13 +88,13 @@ tg_fail() {
 # Versioning
 versioning() {
     cat arch/arm64/configs/"${DEFCONFIG}" | grep CONFIG_LOCALVERSION= | tee /mnt/workdir/name.sh
-    sed -i 's/-Mechatron-Meme-rebased-//g' /mnt/workdir/name.sh
+    sed -i 's/-Mechatron-MemeA11-//g' /mnt/workdir/name.sh
     source /mnt/workdir/name.sh
 }
 
 # Costumize
 versioning
-KERNEL="Mechatron-Meme-rebased"
+KERNEL="Mechatron-MemeA11"
 DEVICE="Surya"
 KERNELTYPE="$CONFIG_LOCALVERSION"
 KERNELNAME="${KERNEL}-${KERNELTYPE}-${DEVICE}-$(date +%d%m%Y-%H%M)"
