@@ -120,7 +120,7 @@ build_failed() {
 # Building
 makekernel() {
     sed -i "s/${KERNELTYPE}/${KERNELTYPE}/g" "${KERNEL_DIR}/arch/arm64/configs/${DEFCONFIG}"
-    echo "ichiro@MacBook-Pro-2012" > "$KERNEL_DIR"/.builderdata
+    export KBUILD_BUILD_HOST="ichiro@MacBook-Pro-2012"
     export PATH="${COMP_PATH}"
     make O=out ARCH=arm64 ${DEFCONFIG} savedefconfig
     if [[ "${REGENERATE_DEFCONFIG}" =~ "true" ]]; then
