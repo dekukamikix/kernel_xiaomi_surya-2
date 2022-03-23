@@ -1731,9 +1731,7 @@ static int ssif_probe(struct i2c_client *client, const struct i2c_device_id *id)
 
  out:
 	if (rv) {
-		if (addr_info)
-			addr_info->client = NULL;
-
+		addr_info->client = NULL;
 		dev_err(&client->dev, "Unable to start IPMI SSIF: %d\n", rv);
 		kfree(ssif_info);
 	}
